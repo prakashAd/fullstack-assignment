@@ -26,16 +26,40 @@ const Navbar = () => {
                 <a className="nav-link active" aria-current="page" href="/">
                   Home
                 </a>
+                
+              </li>
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
+                  All Books
+                </a>
+                
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
+                  About us
+                </a>
+                
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/">
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
+             Contact
+                </a>
+                
+              </li>
             </ul>
           
-            <div className="col-md-3 fs-4 d-flex justify-content-evenly">
-              <Link to="/register"><i className="bi bi-person-plus "></i></Link>
-              <Link to="/signin"><i className="bi bi-box-arrow-in-left"></i></Link>
+            <div className="col-md-3 fs-4 d-flex justify-content-evenly ">
+              <Link to="/register"><i className="bi bi-person-plus"></i></Link>
+              <Link to="/signin"><i className="bi bi-box-arrow-in-right"></i></Link>
+              <Link to="/cart"><i className="bi bi-cart-dash"></i></Link>
             </div> 
           </div>
         </div>
