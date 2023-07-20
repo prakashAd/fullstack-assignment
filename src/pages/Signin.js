@@ -1,29 +1,27 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { signIn} from "../api/userApi";
+import { authenticate, signIn } from "../api/userApi";
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+  let [error, setError] = useState('');
+  let [success, setSuccess] = useState(false);
 
-  let navigate =useNavigate()
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-      signIn (email,password)
-      .then(data =>{
-        if(data.error){
-          setError(data.error);
-        } 
-        else{
-          setSuccess(true);
-        }
-        
-      });
-      
+    e.preventDefault();
+    signIn(email, password)
+    .then(data => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        authenticate(data);
+        setSuccess(true);
+      }
+    })
   };
 
   const showError = () => {
@@ -31,12 +29,11 @@ const Signin = () => {
       return <div className="alert alert-danger">{error}</div>;
     }
   };
-  const redirect =()=>{
-    if(success){
-      navigate('/')
-
+  const redirect = () => {
+    if (success) {
+      navigate("/");
     }
-  }
+  };
   return (
     <>
       <Navbar />
@@ -82,6 +79,6 @@ const Signin = () => {
       </div>
     </>
   );
-}
+};
 
 export default Signin;

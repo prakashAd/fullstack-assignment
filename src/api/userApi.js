@@ -9,8 +9,8 @@ export const userRegister = (username,email,password) =>{
         },
         body:JSON.stringify(user)
 })
-.then(response=>response.json())
-.catch(error=>console.log(error))
+.then(res=>res.json())
+.catch(err=>console.log(err))
 }
 
 //signin
@@ -23,6 +23,12 @@ export const signIn = (email,password) =>{
         },
         body:JSON.stringify(user)
     })
-    .then(response=>response.json())
-    .catch(error=>console.log(error))
+    .then(res=>res.json())
+    .catch(err=>console.log(err))
+}
+
+//to keep signed in
+
+export const authenticate =(data)=>{
+    localStorage.setItem('jwt',JSON.stringify(data))
 }

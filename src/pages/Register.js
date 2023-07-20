@@ -1,26 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
+import { userRegister } from '../api/userApi'
 
 
 const Register = () => {
+  let [username,setUsername] =useState('')
+  let [email,setEmail] =useState('')
+  let [password,setPassword] =useState('')
+  let [error,setError] =useState('')
+  let [success,setSuccess] =useState('false')
+
+
+ const handleSubmit = (e)=>{
+  e.preventDefault()
+  userRegister(username,email,password)
+  .then(data=>{
+    if(data.error){
+      setError(data.error)
+      setSuccess(false)
+    }
+    else{
+      setSuccess(true)
+      setError('')
+    }
+  })
+
+  }
+  const showError =()=>{
+
+    if(error){
+      return <div className='alert alert-danger'>{error}</div>
+    }
+  }
+
+  const showSuccess =()=>{
+
+    if(success){
+      return <div className='alert alert-success'>User registered sucesssfully</div>
+    }
+  }
   return (
     <>
     <Navbar/>
+    {showError()}
+    {showSuccess()}
  <div className="container-fluid">
         <div className="row">
           <div className="col-md-5">
             <form className="mx-5 my-2 table-hover">
               <div className="mb-3">
                 <label for="firstName" className="form-label">
-                  First Name
+                  user Name
                 </label>
                 <input
                   type="name"
                   placeholder="Enter First Name"
                   className="form-control"
-                  id="firstName"
+                  id="firstName"onChange={(e)=>{setUsername(e.target.value)}}
                 ></input>
-                <label for="lastName" className="form-label">
+                {/* <label for="lastName" className="form-label">
                   Last Name
                 </label>
                 <input
@@ -28,7 +66,7 @@ const Register = () => {
                   placeholder="Enter Last Name"
                   className="form-control"
                   id="exampleEmail1"
-                ></input>
+                ></input> */}
                 <label for="exampleEmail1" className="form-label">
                   Email Address
                 </label>
@@ -36,7 +74,7 @@ const Register = () => {
                   type="email"
                   placeholder="Email@email.com"
                   className="form-control"
-                  id="exampleEmail1"
+                  id="exampleEmail1" onChange={(e)=>setEmail(e.target.value)}
                 ></input>
               </div>
               <div className="mb-3">
@@ -47,7 +85,7 @@ const Register = () => {
                   type="password"
                   placeholder="*****"
                   className="form-control"
-                  id="exampleFormControlInput1"
+                  id="exampleFormControlInput1" onChange={(e)=>setPassword(e.target.value)}
                 ></input>
               </div>
               <label for="radio" className="form-label mx-1">
@@ -89,7 +127,7 @@ const Register = () => {
               </div>
 
             </form>
-              <button type="submit" className="btn btn-primary mx-5">
+              <button type="submit" className="btn btn-primary mx-5" onClick={handleSubmit}>
                 Submit
               </button>
           </div>
